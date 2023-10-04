@@ -20,6 +20,16 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
+      {{!-- filter area --}}
+      <div class="d-flex justify-content-end">
+        <select class="form-select mb-2 w-25" aria-label="Default select example">
+          <option selected hidden>Sort</option>
+          <option value="A">A → Z</option>
+          <option value="Z">Z → A</option>
+          <option value="category">類別</option>
+          <option value="zone">地區</option>
+        </select>
+      </div>
       <div class="row row-cols-sm-3">
         {{#each restaurants}}
         <div class="text-secondary">

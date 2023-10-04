@@ -53,8 +53,21 @@ app.get('/search', (req, res) => {
 app.get('/restaurants/new', (req, res) => {
   return res.render('new')
 })
-app.get("/restaurants", (req, res) => {
-  
+app.post("/restaurants", (req, res) => {
+  const {name, name_en, category, image, location, phone, google_map, rating, description} = req.body
+  return Restaurant.create({
+    name,
+    name_en,
+    category,
+    image,
+    location,
+    phone,
+    google_map,
+    rating,
+    description,
+  })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 });
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
@@ -74,11 +87,6 @@ app.get("/restaurants/:id/edit", (req, res) => {
     .lean()
     .then((restaurant) => res.render("edit", { restaurant }))
     .catch(error => console.log(error))
-  // const restaurant = restaurantData.results.find(
-  //   (shop) => shop.id.toString() === req.params.res_id
-  // );
-  // // console.log(restaurant)
-  // res.render('show', { restaurant: restaurant });
 });
 
 app.listen(port, () => {

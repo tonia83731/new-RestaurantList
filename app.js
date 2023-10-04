@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import bodyParser from 'body-parser';
 import Restaurant from './models/restaurant.js';
 
 if (process.env.NODE_ENV !== "production") {
@@ -31,6 +32,8 @@ app.engine("hbs", exphbs.engine({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", "hbs");
 app.use(express.static("public"));
 
+// 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
   // res.send('This is my restaurant list build with Express')
@@ -47,17 +50,36 @@ app.get('/search', (req, res) => {
   })
   res.render("index", { restaurants: restaurants, keyword: keyword });
 })
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
+})
+app.get("/restaurants", (req, res) => {
+  
+});
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .lean()
-    .then((restaurant) => res.render('show', {restaurant}))
+    .then((restaurant) => res.render("show", { restaurant }))
+    .catch((error) => console.log(error));
   // const restaurant = restaurantData.results.find(
   //   (shop) => shop.id.toString() === req.params.res_id
   // );
   // // console.log(restaurant)
   // res.render('show', { restaurant: restaurant });
 })
+app.get("/restaurants/:id/edit", (req, res) => {
+  const id = req.params.id;
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render("edit", { restaurant }))
+    .catch(error => console.log(error))
+  // const restaurant = restaurantData.results.find(
+  //   (shop) => shop.id.toString() === req.params.res_id
+  // );
+  // // console.log(restaurant)
+  // res.render('show', { restaurant: restaurant });
+});
 
 app.listen(port, () => {
   console.log(`Express is listening on http://localhost:${port}`)

@@ -1,0 +1,57 @@
+<h1 class="mb-1 restaurant-show-title">新增餐廳表單</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-10 mx-auto mb-2">
+      <form action="/restaurants/{{ restaurant._id }}/edit" method="POST">
+        <div class="row mb-2">
+          <div class="col-8 d-flex flex-column">
+            <label for="edit-name" class="text-secondary">餐廳名稱<span class="text-danger">*</span></label>
+            <input type="text" name="name" class="form-control" placeholder="請輸入餐廳名稱..." id="edit-name" value="{{restaurant.name}}" required>
+          </div>
+          <div class="col-4 d-flex flex-column">
+            <label for="edit-name_en" class="text-secondary">Restaurant Name</label>
+            <input type="text" name="name_en" class="form-control" placeholder="Please enter restaurant name..."
+              id="edit-name_en" value="{{restaurant.name_en}}">
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-6 d-flex flex-column">
+            <label for="edit-category" class="text-secondary">餐廳類別<span class="text-danger">*</span></label>
+            <input type="text" name="category" class="form-control" placeholder="請輸入餐廳類別..." id="edit-category" value="{{restaurant.category}}" required>
+          </div>
+          <div class="col-6 d-flex flex-column">
+            <label for="edit-rating" class="text-secondary">餐廳評分<span class="text-danger">*</span></label>
+            <input type="number" name="rating" class="form-control" placeholder="請輸入餐廳評分..." id="edit-rating" min="1"
+              max="5" value="{{restaurant.rating}}" required>
+          </div>
+        </div>
+        <div class="d-flex flex-column mb-2">
+          <label for="edit-image" class="text-secondary">餐廳圖片<span class="text-danger">*</span></label>
+          <input type="url" name="image" class="form-control" placeholder="請輸入餐廳圖片URL..." id="edit-image" value="{{restaurant.image}}" required>
+        </div>
+        <div class="row mb-2">
+          <div class="col-6 d-flex flex-column">
+            <label for="edit-location" class="text-secondary">餐廳地點<span class="text-danger">*</span></label>
+            <input type="text" name="location" class="form-control" placeholder="請輸入餐廳地點..." id="edit-location" value="{{restaurant.location}}" required>
+          </div>
+          <div class="col-6 d-flex flex-column">
+            <label for="edit-google_map" class="text-secondary">Google Map<span class="text-danger">*</span></label>
+            <input type="url" name="google_map" class="form-control" placeholder="請輸入Google Map URL..."
+              id="edit-google_map" value="{{restaurant.google_map}}" required>
+          </div>
+        </div>
+        <div class="d-flex flex-column mb-2">
+          <label for="edit-phone" class="text-secondary">餐廳電話<span class="text-danger">*</span></label>
+          <input type="text" name="phone" class="form-control" placeholder="請輸入餐廳電話..." id="edit-phone" value="{{restaurant.phone}}" required>
+        </div>
+        <div class="d-flex flex-column mb-4">
+          <label for="edit-description" class="text-secondary">餐廳簡介<span class="text-danger">*</span></label>
+          <textarea name="description" id="edit-description" cols="30" rows="4" class="form-control"
+            placeholder="請輸入餐廳簡介..." style="resize: none;" required>{{restaurant.description}}</textarea>
+        </div>
+        <button type="submit" class="btn btn-major">修改</button>
+        <a href="/" class="btn btn-secondary">取消</a>
+      </form>
+    </div>
+  </div>
+</div>

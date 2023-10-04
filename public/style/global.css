@@ -9,6 +9,15 @@ header {
 .navbar .navbar-brand:hover {
   color: #226089;
 }
+.navbar-btn{
+  border: 1px solid #4592af;
+  color: #4592af;
+}
+.navbar-btn:hover{
+  border: 1px solid #226089;
+  color: white;
+  background-color: rgb(34, 96, 137, .4);
+}
 
 .banner {
   position: relative;

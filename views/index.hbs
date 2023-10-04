@@ -43,7 +43,7 @@
                 <div class="col">
                   <a href="./restaurants/{{ this._id }}/edit" class="btn btn-info w-100">修改</a>
                 </div>
-                <form action="./restaurants/{{ this._id }}/delete" method="POST" class="col">
+                <form action="./restaurants/{{ this._id }}?_method=DELETE" method="POST" class="col">
                   <button type="submit" class="btn btn-secondary w-100">刪除</button>
                 </form>
               </div>

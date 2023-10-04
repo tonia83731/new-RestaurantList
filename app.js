@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
 import Restaurant from './models/restaurant.js';
 
 if (process.env.NODE_ENV !== "production") {
@@ -34,6 +35,8 @@ app.use(express.static("public"));
 
 // 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
 app.use(bodyParser.urlencoded({ extended: true }))
+// 設定每一筆請求都會透過 methodOverride 進行前置處理
+app.use(methodOverride('_method'))
 
 app.get('/', (req, res) => {
   // res.send('This is my restaurant list build with Express')
@@ -88,7 +91,7 @@ app.get("/restaurants/:id/edit", (req, res) => {
     .then((restaurant) => res.render("edit", { restaurant }))
     .catch(error => console.log(error))
 });
-app.post("/restaurants/:id/edit", (req, res) => {
+app.put("/restaurants/:id", (req, res) => {
   const id = req.params.id;
   const {
     name,
@@ -117,6 +120,13 @@ app.post("/restaurants/:id/edit", (req, res) => {
     .then(() => res.redirect(`/restaurants/${id}`))
     .catch((error) => console.log(error));
 });
+app.delete('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .then((restaurant) => restaurant.deleteOne())
+    .then(() => res.redirect("/"))
+    .catch((error) => console.log(error));
+})
 
 app.listen(port, () => {
   console.log(`Express is listening on http://localhost:${port}`)

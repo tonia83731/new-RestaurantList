@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto mb-2">
-      <form action="/restaurants/{{ restaurant._id }}/edit" method="POST">
+      <form action="/restaurants/{{ restaurant._id }}?_method=PUT" method="POST">
         <div class="row mb-2">
           <div class="col-8 d-flex flex-column">
             <label for="edit-name" class="text-secondary">餐廳名稱<span class="text-danger">*</span></label>

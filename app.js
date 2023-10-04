@@ -1,34 +1,35 @@
 import express from 'express'
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
+// import mongoose from 'mongoose'
+// import dotenv from 'dotenv'
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
-import Restaurant from './models/restaurant.js';
+// import Restaurant from './models/restaurant.js';
 import routes from './routes/index.js'
+import './config/mongoose.js'
 
-if (process.env.NODE_ENV !== "production") {
-  dotenv.config();
-}
+// if (process.env.NODE_ENV !== "production") {
+//   dotenv.config();
+// }
 
 const app = express()
 const port = 3000
 import exphbs from 'express-handlebars'
 // const restaurantData = require('./restaurant.json')
-import restaurantData from "./restaurant.json" assert { type: "json" };
+// import restaurantData from "./restaurant.json" assert { type: "json" };
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// mongoose.connect(process.env.MONGODB_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
-const db = mongoose.connection;
+// const db = mongoose.connection;
 
-db.on("error", () => {
-  console.log("mongodb error");
-});
-db.once("open", () => {
-  console.log("mongodb connected!");
-});
+// db.on("error", () => {
+//   console.log("mongodb error");
+// });
+// db.once("open", () => {
+//   console.log("mongodb connected!");
+// });
 
 app.engine("hbs", exphbs.engine({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", "hbs");

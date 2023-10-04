@@ -2,26 +2,27 @@ import mongoose from "mongoose";
 import Restaurant from "../restaurant.js";
 import dotenv from "dotenv";
 import restaurantData from "../../restaurant.json" assert { type: "json" };
+import db from "../../config/mongoose.js";
 const restaurantList = restaurantData.results
 // const restaurantList = require("../restaurant-list.json").results;
 
 if (process.env.NODE_ENV !== "production") {
   dotenv.config();
 }
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// mongoose.connect(process.env.MONGODB_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
 
 
-const db = mongoose.connection;
+// const db = mongoose.connection;
 
-db.on("error", () => {
-  console.log("mongodb error");
-});
+// db.on("error", () => {
+//   console.log("mongodb error");
+// });
 db.once("open", async() => {
-  console.log("mongodb connected!");
+  // console.log("mongodb connected!");
   // let restaurantList = restaurantData.results
   try {
     for (let i = 0; i < restaurantList.length; i++) {

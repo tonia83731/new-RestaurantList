@@ -2,6 +2,7 @@
 This project is enable user to create their own restaurant list. 
 The function include browsing the restaurant list, search restaurant, add restaurant, edit restaurant and delete restaurant
 
+![Alt text](public/image/printscreen_landing.png)
 ## Introduction
 * User can browse the restaurant list
 * User can search for the restaurant

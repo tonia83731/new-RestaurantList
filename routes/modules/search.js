@@ -4,13 +4,28 @@ const router = express.Router();
 import Restaurant from "../../models/restaurant.js";
 
 router.get("/", (req, res) => {
-  // if (!req.query.keyword) res.redirect("/");
   const keywords = req.query.keyword;
-  // console.log(keywords)
   if (!keywords) return res.redirect("/");
-  // const keyword = req.query.keywords.trim().toLowerCase();
-  Restaurant.find()
+  const sortMethod = req.query.sortMethod
+  console.log(sortMethod)
+  let sortIndex = {name: 'asc'}
+  switch (sortMethod) {
+    case "評分":
+      sortIndex = { rating: "desc" };
+      break;
+    case "A → Z":
+      sortIndex = { name: "asc" };
+      break;
+    case "Z → A":
+      sortIndex = { name: "desc" };
+      break;
+    default:
+      sortIndex = { name: "asc" };
+      break;
+  }
+  Restaurant.find({})
     .lean()
+    .sort(sortIndex)
     .then((restaurants) => {
       const restaurant = restaurants.filter((shop) => {
         return (
@@ -18,14 +33,9 @@ router.get("/", (req, res) => {
           shop.category.includes(keywords.toLowerCase())
         );
       });
-      // console.log(restaurant)
-      res.render("index", { restaurants: restaurant, keywords });
+      res.render("index", { restaurants: restaurant, keywords, sortMethod });
     })
     .catch((error) => console.error(error));
-  // const restaurants = restaurantData.results.filter(shop => {
-  //   return shop.name.toLowerCase().includes(keyword.toLowerCase());
-  // })
-  // res.render("index", { restaurants: restaurants, keyword: keyword });
 });
 
 export default router
